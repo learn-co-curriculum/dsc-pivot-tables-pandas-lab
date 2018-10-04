@@ -1,5 +1,5 @@
 
-# Creating Pivot Tables in Pandas - Lab
+# Pivot Tables with Pandas - Lab
 
 ## Introduction
 

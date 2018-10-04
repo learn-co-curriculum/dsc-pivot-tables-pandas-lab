@@ -7,11 +7,12 @@ In this lab, we'll learn how to make use of our newfound knowledge of pivot tabl
 
 ## Objectives
 
-* Understand what *Long* vs. *Wide* means, and why the *Long* format is often considered "tidy".
-* Understand what a multi-level hierarchical index is
-* Use `.groupby` statements with aggregate functions
-* Create Pivot tables with pandas
-* Understand how to switch between *Long* and *Wide* using `stack()` and `unstack()`
+You will be able to:
+
+* Understand and explain what a multi-level hierarchical index is
+* Understand, explain the difference and use df.pivot and pd.pivot_table
+* Switch between “long” and “wide” in a DataFrame using stack() and unstack()
+* Transform “wide” to “long” DataFrames using `melt`
 
 ## Getting Started
 
@@ -336,7 +337,7 @@ pivot = None
 
 After calling unstack a second time, we can see that `pivot` has a flattened structure, since it has been completely unstacked!
 
-# Conclusion
+## Summary
 
 In this lab, we learned how to:
 

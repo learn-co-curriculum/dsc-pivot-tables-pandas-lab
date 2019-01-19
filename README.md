@@ -473,7 +473,7 @@ df.groupby(['Gender', 'Race']).min().head()
 
 ```python
 #Your code here
-df.groupby(['State'])['Deaths'].sum().plot(kind='barh', figsize=(15,8))
+df.groupby(['State'])['Deaths'].sum().sort_values().plot(kind='barh', figsize=(15,8))
 plt.title('Total Deaths by State')
 plt.xlabel("# of Deaths")
 ```
@@ -481,12 +481,12 @@ plt.xlabel("# of Deaths")
 
 
 
-    Text(0.5,0,'# of Deaths')
+    Text(0.5, 0, '# of Deaths')
 
 
 
 
-![png](output_15_1.png)
+![png](index_files/index_15_1.png)
 
 
 ### Inspecting our Data
@@ -517,7 +517,7 @@ df.info()
     Crude Rate                  4115 non-null object
     dtypes: float64(1), int64(2), object(9)
     memory usage: 385.9+ KB
-    
+
 
 Let's look at some samples from the Population column to see if the current encoding seems appropriate for the data it contains. 
 
@@ -553,10 +553,10 @@ df.Population.value_counts()[:5]
 
 
     Not Applicable    75
-    4258               2
-    6420               2
-    11680              2
-    5142               2
+    3654               2
+    1512               2
+    249                2
+    30070              2
     Name: Population, dtype: int64
 
 
@@ -587,7 +587,7 @@ print(df.Population.dtype)
 ```
 
     int64
-    
+
 
 ### 5b) Complete the Bar Chart
 
@@ -602,12 +602,12 @@ df.groupby('State')['Population'].mean().plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2193a812f98>
+    <matplotlib.axes._subplots.AxesSubplot at 0x11d769668>
 
 
 
 
-![png](output_25_1.png)
+![png](index_files/index_25_1.png)
 
 
 Below we will investigate how we can combine the **pivot** method along with the **groupby** method to combine some cool **stacked bar charts**!
@@ -1281,12 +1281,12 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2193ca14be0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x11d9322e8>
 
 
 
 
-![png](output_49_1.png)
+![png](index_files/index_49_1.png)
 
 
 Notice the Y-axis is currently just a list of numbers.  That's because when we reset the index, it defaulted to assigning integers as the index for the DataFrame.  Let's set the index back to `'State'`, and then recreate the visualization. 
@@ -1309,12 +1309,12 @@ pivot.set_index('State').plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2193ce8a470>
+    <matplotlib.axes._subplots.AxesSubplot at 0x11db98198>
 
 
 
 
-![png](output_51_1.png)
+![png](index_files/index_51_1.png)
 
 
 Now, that we've created a visualization with the states as the y-axis, let's print out the head of the `pivot` object again. 
@@ -1388,12 +1388,12 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2193cf55160>
+    <matplotlib.axes._subplots.AxesSubplot at 0x11ded0c18>
 
 
 
 
-![png](output_55_1.png)
+![png](index_files/index_55_1.png)
 
 
 Again, let's check the head of the DataFrame to confirm that the index structure has changed.  
@@ -1464,12 +1464,12 @@ pivot.plot(kind='barh', figsize=(15,8), stacked=True)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2193cf29e48>
+    <matplotlib.axes._subplots.AxesSubplot at 0x11ded7438>
 
 
 
 
-![png](output_59_1.png)
+![png](index_files/index_59_1.png)
 
 
 ## Stacking and Unstacking DataFrames

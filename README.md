@@ -36,11 +36,11 @@ Now, display the head of the DataFrame to ensure everything loaded correctly.
 
 Our data is currently in **_Wide_** format.  We can tidy this up by converting it to **_Long_** format by using groupby statements to aggregate our data into a much neater, more readable format. 
 
-# Groupby Aggregations
+## Groupby Aggregations
 
 Complete the following groupby statements.
 
-# 1) Groupby State and Gender. Sum the values.
+### 1) Groupby State and Gender. Sum the values.
 
 
 ```python
@@ -48,7 +48,7 @@ Complete the following groupby statements.
 
 ```
 
-# 2) Groupby State and Gender and Race. Find the average values.
+### 2) Groupby State and Gender and Race. Find the average values.
 
 
 ```python
@@ -56,7 +56,7 @@ Complete the following groupby statements.
 
 ```
 
-# 3) Groupby Gender and Race. Find the minimum values.
+### 3) Groupby Gender and Race. Find the minimum values.
 
 
 ```python
@@ -64,7 +64,7 @@ Complete the following groupby statements.
 
 ```
 
-## 4) Create a bar chart of the total number of deaths by state.
+### 4) Create a bar chart of the total number of deaths by state.
 * Sort your columns in order (ascending or descending are both acceptable).  
 * Also make sure to include a title, axes labels and have your graph be an appropriate size.
 
@@ -86,13 +86,13 @@ Let's look at some samples from the Population column to see if the current enco
 
 In the cell below, display the population values for the first 5 rows in the DataFrame.  
 
-Just to be extra sure, let's check the value counts to see how many times each unqiue value shows up in the dataset. We'll only look at the top 5. 
+Just to be extra sure, let's check the value counts to see how many times each unique value shows up in the dataset. We'll only look at the top 5. 
 
 In the cell below, print out the top 5 `value_counts()` of the population column of the DataFrame. 
 
 Clearly, this data should be stored as a numeric type, not a categorical type.  
-
-### 5a) Reformat the Population Column as an Integer
+ 
+### 5 a) Reformat the Population Column as an Integer
 As stands, not all values will be able to be reformated as integers. Most of the cells in the the `Population` column contain integer values, but the entire column is currently encoded in string format because some cells contain the string `"Not Applicable"`.
 
 We need to remove these rows before we can cast the Population column to an Integer data type. 
@@ -113,7 +113,7 @@ to_drop = None
 
 ```
 
-### 5b) Complete the Bar Chart
+### 5 b) Complete the Bar Chart
 
 Now that we've reformatted our data, let's create a bar chart of the of the Mean Population by State.
 
@@ -125,7 +125,7 @@ Now that we've reformatted our data, let's create a bar chart of the of the Mean
 
 Below we will investigate how we can combine the **pivot** method along with the **groupby** method to combine some cool **stacked bar charts**!
 
-### Using Aggregate Functions
+## Using Aggregate Functions
 
 In the cell below:
 
@@ -175,7 +175,7 @@ In the cell below, examine the `columns` attribute of `grouped` to confirm this.
 
 ```
 
-#### Column Levels
+### Column Levels
 
 Since we're working with miulti-hierarchical indices, we can examine the indices available at each level.
 
@@ -183,7 +183,7 @@ In the cell below, use the `get_level_values` method contained within the DataFr
 
 Now, get the level values for the inner layer of the index. 
 
-### Flattening the DataFrame
+## Flattening the DataFrame
 
 We can also **_flatten_** the DataFrame from a multi-hierarchical index to more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it--but take some time to examine the code in the cell below and see if you can understand how it works! 
 

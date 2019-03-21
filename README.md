@@ -486,7 +486,7 @@ plt.xlabel("# of Deaths")
 
 
 
-![png](index_files/index_15_1.png)
+![png](index_files/index_13_1.png)
 
 
 ### Inspecting our Data
@@ -607,7 +607,7 @@ df.groupby('State')['Population'].mean().plot(kind='barh', figsize=(15,8))
 
 
 
-![png](index_files/index_25_1.png)
+![png](index_files/index_23_1.png)
 
 
 Below we will investigate how we can combine the **pivot** method along with the **groupby** method to combine some cool **stacked bar charts**!
@@ -1286,7 +1286,7 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-![png](index_files/index_49_1.png)
+![png](index_files/index_47_1.png)
 
 
 Notice the Y-axis is currently just a list of numbers.  That's because when we reset the index, it defaulted to assigning integers as the index for the DataFrame.  Let's set the index back to `'State'`, and then recreate the visualization. 
@@ -1314,7 +1314,7 @@ pivot.set_index('State').plot(kind='barh', figsize=(15,8))
 
 
 
-![png](index_files/index_51_1.png)
+![png](index_files/index_49_1.png)
 
 
 Now, that we've created a visualization with the states as the y-axis, let's print out the head of the `pivot` object again. 
@@ -1393,7 +1393,7 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-![png](index_files/index_55_1.png)
+![png](index_files/index_53_1.png)
 
 
 Again, let's check the head of the DataFrame to confirm that the index structure has changed.  
@@ -1469,7 +1469,7 @@ pivot.plot(kind='barh', figsize=(15,8), stacked=True)
 
 
 
-![png](index_files/index_59_1.png)
+![png](index_files/index_57_1.png)
 
 
 ## Stacking and Unstacking DataFrames

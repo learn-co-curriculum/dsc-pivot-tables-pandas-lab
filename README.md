@@ -129,7 +129,7 @@ Below we will investigate how we can combine the **pivot** method along with the
 
 In the cell below:
 
-* Group `df` by `'State'` and  `'Gender'`, and then slice both `'Death'` and `'Population'` from it. Chain the `.agg()` method to return the mean, min, max, and standard deviation these sliced columns. 
+* Group `df` by `'State'` and  `'Gender'`, and then slice both `'Deaths'` and `'Population'` from it. Chain the `.agg()` method to return the mean, min, max, and standard deviation these sliced columns. 
 
 **_NOTE:_** This only requires one line of code.  
 

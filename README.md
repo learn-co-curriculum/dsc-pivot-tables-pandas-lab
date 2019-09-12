@@ -22,7 +22,7 @@ In the cell below:
 
 * Import `pandas` and set the standard alias
 * Import `matplotlib.pyplot` and set the standard alias
-* Run the ipython magic command to display matplotlib graphs inline within the notebook
+* Run the iPython magic command to display matplotlib graphs inline within the notebook
 
 
 ```python
@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt
 ```
 
 ## Load the Data
-The data for this activity is stored in a file called `'causes_of_death.tsv'` which is a somewhat morbid dataset from the center for disease control. Note that the file extension .tsv indicates that this data is formatted slightly differently then the standard .csv, the difference being that it has 'tab seperated values' instead of 'comma seperated values'. As such, pass in the optional parameter `delimiter='\t'` into the `pd.read_csv()` method.
+The data for this activity is stored in a file called `'causes_of_death.tsv'` which is a somewhat morbid dataset from the center for disease control. Note that the file extension .tsv indicates that this data is formatted slightly differently then the standard .csv, the difference being that it has 'tab separated values' instead of 'comma separated values'. As such, pass in the optional parameter `delimiter='\t'` into the `pd.read_csv()` method.
 
 
 ```python
@@ -565,9 +565,9 @@ df.Population.value_counts()[:5]
 Clearly, this data should be stored as a numeric type, not a categorical type.  
  
 ### 5 a) Reformat the Population Column as an Integer
-As stands, not all values will be able to be reformated as integers. Most of the cells in the the `Population` column contain integer values, but the entire column is currently encoded in string format because some cells contain the string `"Not Applicable"`.
+As stands, not all values will be able to be reformated as integers. Most of the cells in the `Population` column contain integer values, but the entire column is currently encoded in string format because some cells contain the string `"Not Applicable"`.
 
-We need to remove these rows before we can cast the Population column to an Integer data type. 
+We need to remove these rows before we can cast the Population column to an integer data type. 
 
 In the cell below:
 
@@ -592,7 +592,7 @@ print(df.Population.dtype)
 
 ### 5 b) Complete the Bar Chart
 
-Now that we've reformatted our data, let's create a bar chart of the of the Mean Population by State.
+Now that we've reformatted our data, let's create a bar chart of the Mean Population by State.
 
 
 ```python
@@ -617,13 +617,13 @@ Below we will investigate how we can combine the **pivot** method along with the
 
 In the cell below:
 
-* Group `df` by `'State'` and  `'Gender'`, and then slice both `'Deaths'` and `'Population'` from it. Chain the `.agg()` method to return the mean, min, max, and standard deviation these sliced columns. 
+* Group `df` by `'State'` and  `'Gender'`, and then slice both `'Deaths'` and `'Population'` from it. Chain the `.agg()` method to return the mean, min, max, and standard deviation of these sliced columns. 
 
 **_NOTE:_** This only requires one line of code.  
 
 By now, you've probably caught on that the code required to do this follows this pattern:    `([things to group by])[columns to slice].agg([aggregates to return])`
 
-Then, display the head of this of this new DataFrame.
+Then, display the head of this new DataFrame.
 
 
 ```python
@@ -781,7 +781,7 @@ In the cell below, call the DataFrame's `reset_index()` function.  Then, display
 
 
 ```python
-# First, reset the index. Notice the subtle difference; State and Gender are now columns rather then the index.
+# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index.
 grouped = grouped.reset_index()
 grouped.head()
 ```
@@ -914,7 +914,7 @@ grouped.index
 
 
 
-However, look again at the displayed DataFrame--specifically, the columns.  Resetting the index has caused the DataFrame to use a mutlti-indexed structure for the columns. 
+However, look again at the displayed DataFrame--specifically, the columns.  Resetting the index has caused the DataFrame to use a multi-indexed structure for the columns. 
 
 In the cell below, examine the `columns` attribute of `grouped` to confirm this. 
 
@@ -968,7 +968,7 @@ grouped.columns.get_level_values(1)
 
 ## Flattening the DataFrame
 
-We can also **_flatten_** the DataFrame from a multi-hierarchical index to more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it--but take some time to examine the code in the cell below and see if you can understand how it works! 
+We can also **_flatten_** the DataFrame from a multi-hierarchical index to a more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it--but take some time to examine the code in the cell below and see if you can understand how it works! 
 
 
 ```python
@@ -1196,7 +1196,7 @@ In the cell below, reset the index of the `pivot` object as we did previously.  
 
 
 ```python
-# Again, notice the subtle difference of reseting the index:
+# Again, notice the subtle difference of resetting the index:
 pivot = pivot.reset_index( )
 pivot.head()
 ```
@@ -1885,7 +1885,7 @@ pivot
 
 
 
-After calling unstack a second time, we can see that `pivot` has a flattened structure, since it has been completely unstacked!
+After calling unstack a second time, we can see that `pivot` has a flattened structure since it has been completely unstacked!
 
 ## Summary
 

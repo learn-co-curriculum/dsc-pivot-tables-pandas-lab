@@ -3,26 +3,29 @@
 
 ## Introduction
 
-In this lab, we'll learn how to make use of our newfound knowledge of pivot tables to work with real-world data.  We'll start by exploring 
+In this lab, we'll learn how to make use of our newfound knowledge of pivot tables to work with real-world data.  
 
 ## Objectives
 
-You will be able to:
+In this lab you will:
 
-* Understand and explain what a multi-level hierarchical index is
-* Understand, explain the difference and use df.pivot and pd.pivot_table
-* Switch between “long” and “wide” in a DataFrame using stack() and unstack()
-* Transform “wide” to “long” DataFrames using `melt`
+- Describe what is meant by long and wide format data 
+- Use multi-hierarchical indexing to access aggregated data 
+- Use pivot to create a more organized aggregated DataFrame 
+- Use stack and unstack to move between different level of multi-indexing 
 
 ## Getting Started
 
-### Import Pandas and Matplotlib.pyplot Using Standard Aliases
-
 In the cell below:
 
-* Import `pandas` and set the standard alias
-* Import `matplotlib.pyplot` and set the standard alias
+* Import `pandas` and set the standard alias   
+* Import `matplotlib.pyplot` and set the standard alias   
 * Run the iPython magic command to display matplotlib graphs inline within the notebook
+
+
+```python
+
+```
 
 
 ```python
@@ -32,8 +35,8 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-## Load the Data
-The data for this activity is stored in a file called `'causes_of_death.tsv'` which is a somewhat morbid dataset from the center for disease control. Note that the file extension .tsv indicates that this data is formatted slightly differently then the standard .csv, the difference being that it has 'tab separated values' instead of 'comma separated values'. As such, pass in the optional parameter `delimiter='\t'` into the `pd.read_csv()` method.
+## Load the data
+The data for this activity is stored in a file called `'causes_of_death.tsv'` which is a somewhat morbid dataset from the center for disease control. Note that the file extension .tsv indicates that this data is formatted slightly differently then the standard .csv, the difference being that it has 'tab separated values' instead of 'comma separated values'. As such, pass in the optional parameter `delimiter='\t'` into the `pd.read_csv()` function.
 
 
 ```python
@@ -47,6 +50,11 @@ df = pd.read_csv('causes_of_death.tsv', delimiter='\t')
 ```
 
 Now, display the head of the DataFrame to ensure everything loaded correctly.
+
+
+```python
+
+```
 
 
 ```python
@@ -173,11 +181,11 @@ df.head()
 
 Our data is currently in **_Wide_** format.  We can tidy this up by converting it to **_Long_** format by using groupby statements to aggregate our data into a much neater, more readable format. 
 
-## Groupby Aggregations
+## Groupby aggregations
 
 Complete the following groupby statements.
 
-### 1) Groupby State and Gender. Sum the values.
+- Groupby `State` and `Gender`. Sum the values.
 
 
 ```python
@@ -266,7 +274,7 @@ df.groupby(['State', 'Gender']).sum().head()
 
 
 
-### 2) Groupby State and Gender and Race. Find the average values.
+- Groupby `State`, `Gender`, and `Race`. Find the average values.
 
 
 ```python
@@ -357,7 +365,7 @@ df.groupby(['State', 'Gender', 'Race']).mean().head()
 
 
 
-### 3) Groupby Gender and Race. Find the minimum values.
+- Groupby `Gender` and `Race`. Find the minimum values.
 
 
 ```python
@@ -494,22 +502,23 @@ df.groupby(['Gender', 'Race']).min().head()
 
 
 
-### 4) Create a bar chart of the total number of deaths by state.
+Create a bar chart of the total number of deaths by state: 
+
 * Sort your columns in order (ascending or descending are both acceptable).  
 * Also make sure to include a title, axes labels and have your graph be an appropriate size.
 
-**_NOTE:_** In order to do this, slice the `Deaths` column after the `.groupby()` method, but before the `sum()` method.  You can even chain the `.plot()` call on after the `sum()` call and do this all on one line, excluding the labeling of the graph!
+**_NOTE:_** In order to do this, slice the `Deaths` column after the `.groupby()` method, but before the `.sum()` method.  You can even chain the `.plot()` method on after the `.sum()` method and do this all on one line, excluding the labeling of the graph!
 
 
 ```python
-#Your code here
+# Your code here
 
 ```
 
 
 ```python
 # __SOLUTION__ 
-#Your code here
+# Your code here
 df.groupby(['State'])['Deaths'].sum().sort_values().plot(kind='barh', figsize=(15,8))
 plt.title('Total Deaths by State')
 plt.xlabel("# of Deaths")
@@ -523,14 +532,19 @@ plt.xlabel("# of Deaths")
 
 
 
-![png](index_files/index_18_1.png)
+![png](index_files/index_20_1.png)
 
 
-### Inspecting our Data
+### Inspecting our data
 
-Let's go one step further and get a print-out of the data type of each column. 
+Let's go one step further and print the data type of each column. 
 
-In the cell below, get the `.info()` of our DataFrame, and note the data type that each column is currently stored as.  
+In the cell below, use the `.info()` method of the DataFrame, and note the data type that each column is currently stored as.  
+
+
+```python
+
+```
 
 
 ```python
@@ -538,28 +552,14 @@ In the cell below, get the `.info()` of our DataFrame, and note the data type th
 df.info()
 ```
 
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 4115 entries, 0 to 4114
-    Data columns (total 12 columns):
-    Notes                       0 non-null float64
-    State                       4115 non-null object
-    State Code                  4115 non-null int64
-    Ten-Year Age Groups         4115 non-null object
-    Ten-Year Age Groups Code    4115 non-null object
-    Gender                      4115 non-null object
-    Gender Code                 4115 non-null object
-    Race                        4115 non-null object
-    Race Code                   4115 non-null object
-    Deaths                      4115 non-null int64
-    Population                  4115 non-null object
-    Crude Rate                  4115 non-null object
-    dtypes: float64(1), int64(2), object(9)
-    memory usage: 385.9+ KB
-
-
-Let's look at some samples from the Population column to see if the current encoding seems appropriate for the data it contains. 
+Let's look at some samples from the `Population` column to see if the current encoding seems appropriate for the data it contains. 
 
 In the cell below, display the population values for the first 5 rows in the DataFrame.  
+
+
+```python
+
+```
 
 
 ```python
@@ -585,6 +585,11 @@ In the cell below, print out the top 5 `value_counts()` of the population column
 
 
 ```python
+
+```
+
+
+```python
 # __SOLUTION__ 
 df.Population.value_counts()[:5]
 ```
@@ -593,33 +598,34 @@ df.Population.value_counts()[:5]
 
 
     Not Applicable    75
-    3654               2
-    1512               2
-    249                2
-    30070              2
+    14810              2
+    113598             2
+    11680              2
+    6420               2
     Name: Population, dtype: int64
 
 
 
 Clearly, this data should be stored as a numeric type, not a categorical type.  
  
-### 5 a) Reformat the Population Column as an Integer
-As stands, not all values will be able to be reformated as integers. Most of the cells in the `Population` column contain integer values, but the entire column is currently encoded in string format because some cells contain the string `"Not Applicable"`.
+### Reformat the `Population` column as an integer
+As it stands, not all values can be reformated as integers. Most of the cells in the `Population` column contain integer values, but the entire column is currently encoded in string format because some cells contain the string `'Not Applicable'`.
 
-We need to remove these rows before we can cast the Population column to an integer data type. 
+We need to remove these rows before we can cast the `Population` column to an integer data type. 
 
 In the cell below:
 
-* Slice the rows of `df` where the Population column is equal to `'Not Applicable'`.
-* Use `to_drop.index`  to drop the offending rows from `df`. Be sure to set the `axis=0`, and `inplace=True`
-* Cast the Population column to an integer data type using the `.astype()` function, with the single parameter `int64` passed in. 
-* Print the Population column's `dtype` attribute to confirm it is now stored in `int64` format. 
+* Slice the rows of `df` where the `Population` column is equal to `'Not Applicable'`  
+* Use `to_drop.index` to drop the offending rows from `df`. Be sure to set the `axis=0`, and `inplace=True`  
+* Cast the `Population` column to an integer data type using the `.astype()` method, with the single parameter `int64` passed in  
+* Print the `Population` column's `dtype` attribute to confirm it is now stored in `int64` format  
+
 
 **_NOTE:_** `.astype()` returns a copy of the column, so make sure you set the Population column equal to what this method returns--don't just call it!
 
 
 ```python
-#Your code here
+# Your code here
 to_drop = None
 
 ```
@@ -627,47 +633,47 @@ to_drop = None
 
 ```python
 # __SOLUTION__ 
-#Your code here
+# Your code here
 to_drop = df[df['Population'] == 'Not Applicable']
 df.drop(to_drop.index, axis=0, inplace=True)
-df.Population = df.Population.astype('int64')
-print(df.Population.dtype)
+df['Population'] = df['Population'].astype('int64')
+print(df['Population'].dtype)
 ```
 
     int64
 
 
-### 5 b) Complete the Bar Chart
+### Complete the bar chart
 
-Now that we've reformatted our data, let's create a bar chart of the Mean Population by State.
+Now that we've reformatted our data, let's create a bar chart of the mean `Population` by `State`. 
 
 
 ```python
-#Your code here
+# Your code here
 
 ```
 
 
 ```python
 # __SOLUTION__ 
-#Your code here
+# Your code here
 df.groupby('State')['Population'].mean().plot(kind='barh', figsize=(15,8))
 ```
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x11d769668>
+    <matplotlib.axes._subplots.AxesSubplot at 0x120e7fa90>
 
 
 
 
-![png](index_files/index_30_1.png)
+![png](index_files/index_35_1.png)
 
 
-Below we will investigate how we can combine the **pivot** method along with the **groupby** method to combine some cool **stacked bar charts**!
+Below we will investigate how we can combine the `.pivot()` method along with the `.groupby()` method to combine some cool **stacked bar charts**!
 
-## Using Aggregate Functions
+## Use aggregate methods
 
 In the cell below:
 
@@ -677,18 +683,18 @@ In the cell below:
 
 By now, you've probably caught on that the code required to do this follows this pattern:    `([things to group by])[columns to slice].agg([aggregates to return])`
 
-Then, display the head of this new DataFrame.
+Then, display the `.head()` of this new DataFrame.
 
 
 ```python
-# A sample groupby similar to above. 
+# Your code here
 grouped = None
 ```
 
 
 ```python
 # __SOLUTION__ 
-# A sample groupby similar to above. 
+# Your code here 
 grouped = df.groupby(['State', 'Gender'])['Deaths', 
                                           'Population'].agg(['mean', 
                                                              'min', 'max', 'std'])
@@ -822,6 +828,11 @@ In the cell below, display the `index` attribute of this DataFrame.
 
 
 ```python
+
+```
+
+
+```python
 # __SOLUTION__ 
 grouped.index
 ```
@@ -830,7 +841,7 @@ grouped.index
 
 
     MultiIndex(levels=[['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'], ['Female', 'Male']],
-               labels=[[0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 37, 37, 38, 38, 39, 39, 40, 40, 41, 41, 42, 42, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 48, 48, 49, 49, 50, 50], [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]],
+               codes=[[0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 37, 37, 38, 38, 39, 39, 40, 40, 41, 41, 42, 42, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 48, 48, 49, 49, 50, 50], [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]],
                names=['State', 'Gender'])
 
 
@@ -839,18 +850,18 @@ A two-dimensional array denotes the multiple levels, with each possible combinat
 
 Let's reset the index, and then see how it changes. 
 
-In the cell below, call the DataFrame's `reset_index()` function.  Then, display the head of the DataFrame.  
+In the cell below, call the DataFrame's `.reset_index()` method.  Then, display the `.head()` of the DataFrame.  
 
 
 ```python
-# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index.
+# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index 
 grouped = None
 ```
 
 
 ```python
 # __SOLUTION__ 
-# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index.
+# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index 
 grouped = grouped.reset_index()
 grouped.head()
 ```
@@ -967,9 +978,14 @@ grouped.head()
 
 
 
-Note how the way the index is displayed has changed.  The index columns that made up the multi-hierarchical index before are now stored as columns of data, with each row given a more traditional numerical index. 
+Note how the way index is displayed has changed.  The index columns that made up the multi-hierarchical index before are now stored as columns of data, with each row given a more traditional numerical index. 
 
 Let's confirm this by reexamining the `index` attribute of `grouped` in the cell below.
+
+
+```python
+
+```
 
 
 ```python
@@ -984,20 +1000,20 @@ grouped.index
 
 
 
-However, look again at the displayed DataFrame--specifically, the columns.  Resetting the index has caused the DataFrame to use a multi-indexed structure for the columns. 
+However, look again at the displayed DataFrame -- specifically, the columns. Resetting the index has caused the DataFrame to use a multi-indexed structure for the columns. 
 
 In the cell below, examine the `columns` attribute of `grouped` to confirm this. 
 
 
 ```python
-#Notice that this causes columns to be MultiIndexed!
+# Notice that this causes columns to be MultiIndexed!
 
 ```
 
 
 ```python
 # __SOLUTION__ 
-#Notice that this causes columns to be MultiIndexed!
+# Notice that this causes columns to be MultiIndexed!
 grouped.columns
 ```
 
@@ -1005,15 +1021,20 @@ grouped.columns
 
 
     MultiIndex(levels=[['Deaths', 'Population', 'Gender', 'State'], ['mean', 'min', 'max', 'std', '']],
-               labels=[[3, 2, 0, 0, 0, 0, 1, 1, 1, 1], [4, 4, 0, 1, 2, 3, 0, 1, 2, 3]])
+               codes=[[3, 2, 0, 0, 0, 0, 1, 1, 1, 1], [4, 4, 0, 1, 2, 3, 0, 1, 2, 3]])
 
 
 
-### Column Levels
+### Column levels
 
-Since we're working with miulti-hierarchical indices, we can examine the indices available at each level.
+Since we're working with multi-hierarchical indices, we can examine the indices available at each level.
 
-In the cell below, use the `get_level_values` method contained within the DataFrame's `columns` object to get the values for the outermost layer of the index. 
+In the cell below, use the `.get_level_values()` method contained within the DataFrame's `columns` attribute to get the values for the outermost layer of the index. 
+
+
+```python
+
+```
 
 
 ```python
@@ -1034,6 +1055,11 @@ Now, get the level values for the inner layer of the index.
 
 
 ```python
+
+```
+
+
+```python
 # __SOLUTION__ 
 grouped.columns.get_level_values(1)
 ```
@@ -1047,32 +1073,32 @@ grouped.columns.get_level_values(1)
 
 ## Flattening the DataFrame
 
-We can also **_flatten_** the DataFrame from a multi-hierarchical index to a more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it--but take some time to examine the code in the cell below and see if you can understand how it works! 
+We can also **_flatten_** the DataFrame from a multi-hierarchical index to a more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it -- but take some time to examine the code in the cell below and see if you can understand how it works! 
 
 
 ```python
-#We could also flatten these:
+# We could also flatten these:
 cols0 = grouped.columns.get_level_values(0)
 cols1 = grouped.columns.get_level_values(1)
 grouped.columns = [col0 + '_' + col1 if col1 != '' else col0 for col0, col1 in list(zip(cols0, cols1))]
-#The list comprehension above is more complicated then what we need but creates a nicer formatting and
-#demonstrates using a conditional within a list comprehension.
-#This simpler version works but has some tail underscores where col1 is blank:
-#grouped.columns = [col0 + '_' + col1 for col0, col1 in list(zip(cols0, cols1))]
+# The list comprehension above is more complicated then what we need but creates a nicer formatting and
+# demonstrates using a conditional within a list comprehension.
+# This simpler version works but has some tail underscores where col1 is blank:
+# grouped.columns = [col0 + '_' + col1 for col0, col1 in list(zip(cols0, cols1))]
 grouped.columns
 ```
 
 
 ```python
 # __SOLUTION__ 
-#We could also flatten these:
+# We could also flatten these:
 cols0 = grouped.columns.get_level_values(0)
 cols1 = grouped.columns.get_level_values(1)
 grouped.columns = [col0 + '_' + col1 if col1 != '' else col0 for col0, col1 in list(zip(cols0, cols1))]
-#The list comprehension above is more complicated then what we need but creates a nicer formatting and
-#demonstrates using a conditional within a list comprehension.
-#This simpler version works but has some tail underscores where col1 is blank:
-#grouped.columns = [col0 + '_' + col1 for col0, col1 in list(zip(cols0, cols1))]
+# The list comprehension above is more complicated then what we need but creates a nicer formatting and
+# demonstrates using a conditional within a list comprehension.
+# This simpler version works but has some tail underscores where col1 is blank:
+# grouped.columns = [col0 + '_' + col1 for col0, col1 in list(zip(cols0, cols1))]
 grouped.columns
 ```
 
@@ -1088,7 +1114,12 @@ grouped.columns
 
 Now that we've flattened the DataFrame, let's inspect a couple rows to see what it looks like. 
 
-In the cell below, inspect the head of the `grouped` DataFrame. 
+In the cell below, inspect the `.head()` of the `grouped` DataFrame. 
+
+
+```python
+
+```
 
 
 ```python
@@ -1201,17 +1232,17 @@ grouped.head()
 
 
 
-## Using Pivots
+## Using pivots
 
-Now, we'll gain some practice using the DataFrame class's built-in `.pivot()` method.  
+Now, we'll gain some practice using the DataFrame's built-in `.pivot()` method.  
 
-In the cell below, call the DataFrame's pivot method with the following parameters:
+In the cell below, call the DataFrame's `.pivot()` method with the following parameters:
 
 * index = `'State'`
 * columns = `'Gender'`
 * values = `'Deaths_mean'`
 
-Then, display the head of our new `pivot` DataFrame to see what it looks like. 
+Then, display the `.head()` of our new `pivot` DataFrame to see what it looks like. 
 
 
 ```python
@@ -1293,7 +1324,7 @@ Great! We've just created a pivot table.
 
 Let's reset the index and see how it changes our pivot table. 
 
-In the cell below, reset the index of the `pivot` object as we did previously.  Then, display the head of the object to see if we can detect any changes.
+In the cell below, reset the index of the `pivot` object as we did previously.  Then, display the `.head()` of the object to see if we can detect any changes.
 
 
 ```python
@@ -1397,59 +1428,59 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x11d9322e8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x10f6bd4a8>
 
 
 
 
-![png](index_files/index_61_1.png)
+![png](index_files/index_71_1.png)
 
 
 Notice the Y-axis is currently just a list of numbers.  That's because when we reset the index, it defaulted to assigning integers as the index for the DataFrame.  Let's set the index back to `'State'`, and then recreate the visualization. 
 
 In the cell below:
 
-* Use the `pivot` object's `set_index()` method and set the index to `'State'`.  Then, chain this with a `.plot()` call to recreate the visualization using the code we used in the cell above.  
+* Use the `pivot` object's `.set_index()` method and set the index to `'State'`.  Then, chain this with a `.plot()` call to recreate the visualization using the code we used in the cell above.  
 
-All the code in this cell should be done in a single line.  Just call the methods--do not rebind `pivot` to be equal to this line of code. 
+All the code in this cell should be done in a single line.  Just call the methods -- do not rebind `pivot` to be equal to this line of code. 
 
 
 ```python
-#Where's the states?! Notice the y-axis is just a list of numbers.
-#This is populated by the DataFrame's index.
-#When we used the .reset_index() method, we created a new numbered index to name each row. 
-#Let's fix that by making state the index again.
+# Where's the states?! Notice the y-axis is just a list of numbers. 
+# This is populated by the DataFrame's index.
+# When we used the .reset_index() method, we created a new numbered index to name each row. 
+# Let's fix that by making state the index again.
 
 ```
 
 
 ```python
 # __SOLUTION__ 
-#Where's the states?! Notice the y-axis is just a list of numbers.
-#This is populated by the DataFrame's index.
-#When we used the .reset_index() method, we created a new numbered index to name each row. 
-#Let's fix that by making state the index again.
+# Where's the states?! Notice the y-axis is just a list of numbers.
+# This is populated by the DataFrame's index.
+# When we used the .reset_index() method, we created a new numbered index to name each row. 
+# Let's fix that by making state the index again.
 pivot.set_index('State').plot(kind='barh', figsize=(15,8))
 ```
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x11db98198>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1216805f8>
 
 
 
 
-![png](index_files/index_64_1.png)
+![png](index_files/index_74_1.png)
 
 
-Now, that we've created a visualization with the states as the y-axis, let's print out the head of the `pivot` object again. 
+Now that we've created a visualization with the states as the y-axis, let's print out the head of the `pivot` object again. 
 
 
 ```python
 # Also notice that if we call the DataFrame pivot again, state is not it's index.
-#The above method returned a DataFrame with State as index and we plotted it,
-#but it did not update the DataFrame itself.
+# The above method returned a DataFrame with State as index and we plotted it,
+# but it did not update the DataFrame itself.
 
 ```
 
@@ -1457,8 +1488,8 @@ Now, that we've created a visualization with the states as the y-axis, let's pri
 ```python
 # __SOLUTION__ 
 # Also notice that if we call the DataFrame pivot again, state is not it's index.
-#The above method returned a DataFrame with State as index and we plotted it,
-#but it did not update the DataFrame itself.
+# The above method returned a DataFrame with State as index and we plotted it,
+# but it did not update the DataFrame itself.
 pivot.head(2)
 ```
 
@@ -1507,7 +1538,7 @@ pivot.head(2)
 
 
 
-Note that the index has not changed.  That's because the code we wrote when we set the index to the 'State' column returns a copy of the DataFrame object with the index set to 'State'--by default, it does not mutate original `pivot` object.  
+Note that the index has not changed.  That's because the code we wrote when we set the index to the `'State'` column returns a copy of the DataFrame object with the index set to `'State'` -- by default, it does not mutate original `pivot` object.  
 
 If we want to do that, we'll need to capture the new object returned by updating the contents of the `pivot` variable.  
 
@@ -1515,14 +1546,14 @@ In the cell below, set the index of `pivot` to `'State'`.  Then, recreate the ba
 
 
 ```python
-#If we wanted to more permanently change the index we would set it first and then plot:
+# If we wanted to more permanently change the index we would set it first and then plot:
 pivot = None
 ```
 
 
 ```python
 # __SOLUTION__ 
-#If we wanted to more permanently change the index we would set it first and then plot:
+# If we wanted to more permanently change the index we would set it first and then plot:
 pivot = pivot.set_index('State')
 pivot.plot(kind='barh', figsize=(15,8))
 ```
@@ -1530,15 +1561,20 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x11ded0c18>
+    <matplotlib.axes._subplots.AxesSubplot at 0x121672f28>
 
 
 
 
-![png](index_files/index_70_1.png)
+![png](index_files/index_80_1.png)
 
 
-Again, let's check the head of the DataFrame to confirm that the index structure has changed.  
+Again, let's check the `.head()` of the DataFrame to confirm that the index structure has changed.  
+
+
+```python
+
+```
 
 
 ```python
@@ -1600,7 +1636,7 @@ In the cell below, recreate the visualization we did in the cell above, but this
 
 ```python
 # Lastly, let's stack each of these bars for each state.
-#Notice we don't have to worry about index here, because we've already set it above.
+# Notice we don't have to worry about index here, because we've already set it above.
 
 ```
 
@@ -1608,19 +1644,19 @@ In the cell below, recreate the visualization we did in the cell above, but this
 ```python
 # __SOLUTION__ 
 # Lastly, let's stack each of these bars for each state.
-#Notice we don't have to worry about index here, because we've already set it above.
+# Notice we don't have to worry about index here, because we've already set it above.
 pivot.plot(kind='barh', figsize=(15,8), stacked=True)
 ```
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x11ded7438>
+    <matplotlib.axes._subplots.AxesSubplot at 0x121ccf4a8>
 
 
 
 
-![png](index_files/index_75_1.png)
+![png](index_files/index_86_1.png)
 
 
 ## Stacking and Unstacking DataFrames
@@ -1630,6 +1666,11 @@ Now, let's get some practice stacking and unstacking DataFrames.
 ### Stacking
 
 In the cell below, let's display the head of `grouped` to remind ourselves of the format we left it in. 
+
+
+```python
+
+```
 
 
 ```python
@@ -1748,6 +1789,11 @@ In the cell below, call the `grouped` DataFrame's `.stack()` method.
 
 
 ```python
+
+```
+
+
+```python
 # __SOLUTION__ 
 grouped.stack()
 ```
@@ -1820,7 +1866,7 @@ grouped.stack()
 
 
 
-As we can see, the `stack()` method has stacked our DataFrame from a flattened format into one with a multi-hierarchical index! This is an easy, quick way to aggregate our data.
+As we can see, the `.stack()` method has stacked our DataFrame from a flattened format into one with a multi-hierarchical index! This is an easy, quick way to aggregate our data.
 
 ### Unstacking 
 
@@ -1911,7 +1957,7 @@ pivot
 
 Note that it has unstacked the multi-hierarchical structure of the `pivot` DataFrame by one level. Let's call it one more time and display the results!
 
-In the cell below, set pivot equal to `pivot.unstack()` again, and then display the `pivot` object to see how things have changed.
+In the cell below, set `pivot` equal to `pivot.unstack()` again, and then print the `pivot` object to see how things have changed.
 
 
 ```python
@@ -2055,8 +2101,8 @@ After calling unstack a second time, we can see that `pivot` has a flattened str
 
 In this lab, we learned how to:
 
-* Use `groupby` to stack and slice data conditionally
-* Use aggregate functions in combination with groupby statements
+* Use `.groupby()` to stack and slice data conditionally
+* Use aggregate methods in combination with groupby statements
 * Create pivot tables with pandas
 * Leverage pivot tables and groupby statements to create quick visualizations
 * `stack` and `unstack` DataFrames 

@@ -1,4 +1,3 @@
-
 # Pivot Tables with Pandas - Lab
 
 ## Introduction
@@ -29,6 +28,7 @@ In the cell below:
 
 ## Load the data
 The data for this activity is stored in a file called `'causes_of_death.tsv'` which is a somewhat morbid dataset from the center for disease control. Note that the file extension .tsv indicates that this data is formatted slightly differently then the standard .csv, the difference being that it has 'tab separated values' instead of 'comma separated values'. As such, pass in the optional parameter `delimiter='\t'` into the `pd.read_csv()` function.
+
 
 
 ```python

@@ -1,4 +1,3 @@
-
 # Pivot Tables with Pandas - Lab
 
 ## Introduction
@@ -39,10 +38,6 @@ import matplotlib.pyplot as plt
 The data for this activity is stored in a file called `'causes_of_death.tsv'` which is a somewhat morbid dataset from the center for disease control. Note that the file extension .tsv indicates that this data is formatted slightly differently then the standard .csv, the difference being that it has 'tab separated values' instead of 'comma separated values'. As such, pass in the optional parameter `delimiter='\t'` into the `pd.read_csv()` function.
 
 
-**Detailed information about this dataset can be found ['here'](https://wonder.cdc.gov/wonder/help/ucd.html#)**
-
-
-
 ```python
 df = None
 ```
@@ -57,6 +52,7 @@ Now, display the head of the DataFrame to ensure everything loaded correctly.
 
 
 ```python
+# Your code here
 
 ```
 
@@ -201,80 +197,19 @@ Complete the following groupby statements.
 ```python
 # __SOLUTION__ 
 # Your code here
-df.groupby(['State', 'Gender']).sum().head()
+df.groupby(['State', 'Gender'])['Deaths'].sum().head()
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>Notes</th>
-      <th>State Code</th>
-      <th>Deaths</th>
-    </tr>
-    <tr>
-      <th>State</th>
-      <th>Gender</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">Alabama</th>
-      <th>Female</th>
-      <td>0.0</td>
-      <td>40</td>
-      <td>430133</td>
-    </tr>
-    <tr>
-      <th>Male</th>
-      <td>0.0</td>
-      <td>41</td>
-      <td>430647</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Alaska</th>
-      <th>Female</th>
-      <td>0.0</td>
-      <td>80</td>
-      <td>27199</td>
-    </tr>
-    <tr>
-      <th>Male</th>
-      <td>0.0</td>
-      <td>84</td>
-      <td>36135</td>
-    </tr>
-    <tr>
-      <th>Arizona</th>
-      <th>Female</th>
-      <td>0.0</td>
-      <td>180</td>
-      <td>396028</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+    State    Gender
+    Alabama  Female    430133
+             Male      430647
+    Alaska   Female     27199
+             Male       36135
+    Arizona  Female    396028
+    Name: Deaths, dtype: int64
 
 
 
@@ -290,82 +225,19 @@ df.groupby(['State', 'Gender']).sum().head()
 ```python
 # __SOLUTION__ 
 # Your code here
-df.groupby(['State', 'Gender', 'Race']).mean().head()
+df.groupby(['State', 'Gender', 'Race'])['Deaths'].mean().head()
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>Notes</th>
-      <th>State Code</th>
-      <th>Deaths</th>
-    </tr>
-    <tr>
-      <th>State</th>
-      <th>Gender</th>
-      <th>Race</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="5" valign="top">Alabama</th>
-      <th rowspan="4" valign="top">Female</th>
-      <th>American Indian or Alaska Native</th>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>70.875000</td>
-    </tr>
-    <tr>
-      <th>Asian or Pacific Islander</th>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>95.500000</td>
-    </tr>
-    <tr>
-      <th>Black or African American</th>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>9074.000000</td>
-    </tr>
-    <tr>
-      <th>White</th>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>29890.636364</td>
-    </tr>
-    <tr>
-      <th>Male</th>
-      <th>American Indian or Alaska Native</th>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>86.375000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+    State    Gender  Race                            
+    Alabama  Female  American Indian or Alaska Native       70.875000
+                     Asian or Pacific Islander              95.500000
+                     Black or African American            9074.000000
+                     White                               29890.636364
+             Male    American Indian or Alaska Native       86.375000
+    Name: Deaths, dtype: float64
 
 
 
@@ -536,7 +408,9 @@ plt.xlabel("# of Deaths")
 
 
 
+    
 ![png](index_files/index_20_1.png)
+    
 
 
 ### Inspecting our data
@@ -555,6 +429,27 @@ In the cell below, use the `.info()` method of the DataFrame, and note the data 
 # __SOLUTION__ 
 df.info()
 ```
+
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 4115 entries, 0 to 4114
+    Data columns (total 12 columns):
+     #   Column                    Non-Null Count  Dtype  
+    ---  ------                    --------------  -----  
+     0   Notes                     0 non-null      float64
+     1   State                     4115 non-null   object 
+     2   State Code                4115 non-null   int64  
+     3   Ten-Year Age Groups       4115 non-null   object 
+     4   Ten-Year Age Groups Code  4115 non-null   object 
+     5   Gender                    4115 non-null   object 
+     6   Gender Code               4115 non-null   object 
+     7   Race                      4115 non-null   object 
+     8   Race Code                 4115 non-null   object 
+     9   Deaths                    4115 non-null   int64  
+     10  Population                4115 non-null   object 
+     11  Crude Rate                4115 non-null   object 
+    dtypes: float64(1), int64(2), object(9)
+    memory usage: 385.9+ KB
+
 
 Let's look at some samples from the `Population` column to see if the current encoding seems appropriate for the data it contains. 
 
@@ -602,10 +497,10 @@ df.Population.value_counts()[:5]
 
 
     Not Applicable    75
-    14810              2
-    113598             2
-    11680              2
-    6420               2
+    2777               2
+    16653              2
+    3240               2
+    907                2
     Name: Population, dtype: int64
 
 
@@ -667,12 +562,14 @@ df.groupby('State')['Population'].mean().plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x120e7fa90>
+    <AxesSubplot:ylabel='State'>
 
 
 
 
+    
 ![png](index_files/index_35_1.png)
+    
 
 
 Below we will investigate how we can combine the `.pivot()` method along with the `.groupby()` method to combine some cool **stacked bar charts**!
@@ -704,6 +601,10 @@ grouped = df.groupby(['State', 'Gender'])['Deaths',
                                                              'min', 'max', 'std'])
 grouped.head()
 ```
+
+    <ipython-input-13-58bdc6161645>:3: FutureWarning: Indexing with multiple keys (implicitly converted to a tuple of keys) will be deprecated, use a list instead.
+      grouped = df.groupby(['State', 'Gender'])['Deaths',
+
 
 
 
@@ -844,9 +745,28 @@ grouped.index
 
 
 
-    MultiIndex(levels=[['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'], ['Female', 'Male']],
-               codes=[[0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 37, 37, 38, 38, 39, 39, 40, 40, 41, 41, 42, 42, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 48, 48, 49, 49, 50, 50], [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]],
-               names=['State', 'Gender'])
+    MultiIndex([(      'Alabama', 'Female'),
+                (      'Alabama',   'Male'),
+                (       'Alaska', 'Female'),
+                (       'Alaska',   'Male'),
+                (      'Arizona', 'Female'),
+                (      'Arizona',   'Male'),
+                (     'Arkansas', 'Female'),
+                (     'Arkansas',   'Male'),
+                (   'California', 'Female'),
+                (   'California',   'Male'),
+                ...
+                (     'Virginia', 'Female'),
+                (     'Virginia',   'Male'),
+                (   'Washington', 'Female'),
+                (   'Washington',   'Male'),
+                ('West Virginia', 'Female'),
+                ('West Virginia',   'Male'),
+                (    'Wisconsin', 'Female'),
+                (    'Wisconsin',   'Male'),
+                (      'Wyoming', 'Female'),
+                (      'Wyoming',   'Male')],
+               names=['State', 'Gender'], length=102)
 
 
 
@@ -1024,8 +944,17 @@ grouped.columns
 
 
 
-    MultiIndex(levels=[['Deaths', 'Population', 'Gender', 'State'], ['mean', 'min', 'max', 'std', '']],
-               codes=[[3, 2, 0, 0, 0, 0, 1, 1, 1, 1], [4, 4, 0, 1, 2, 3, 0, 1, 2, 3]])
+    MultiIndex([(     'State',     ''),
+                (    'Gender',     ''),
+                (    'Deaths', 'mean'),
+                (    'Deaths',  'min'),
+                (    'Deaths',  'max'),
+                (    'Deaths',  'std'),
+                ('Population', 'mean'),
+                ('Population',  'min'),
+                ('Population',  'max'),
+                ('Population',  'std')],
+               )
 
 
 
@@ -1432,12 +1361,14 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x10f6bd4a8>
+    <AxesSubplot:>
 
 
 
 
+    
 ![png](index_files/index_71_1.png)
+    
 
 
 Notice the Y-axis is currently just a list of numbers.  That's because when we reset the index, it defaulted to assigning integers as the index for the DataFrame.  Let's set the index back to `'State'`, and then recreate the visualization. 
@@ -1470,12 +1401,14 @@ pivot.set_index('State').plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1216805f8>
+    <AxesSubplot:ylabel='State'>
 
 
 
 
+    
 ![png](index_files/index_74_1.png)
+    
 
 
 Now that we've created a visualization with the states as the y-axis, let's print out the head of the `pivot` object again. 
@@ -1565,12 +1498,14 @@ pivot.plot(kind='barh', figsize=(15,8))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x121672f28>
+    <AxesSubplot:ylabel='State'>
 
 
 
 
+    
 ![png](index_files/index_80_1.png)
+    
 
 
 Again, let's check the `.head()` of the DataFrame to confirm that the index structure has changed.  
@@ -1655,12 +1590,14 @@ pivot.plot(kind='barh', figsize=(15,8), stacked=True)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x121ccf4a8>
+    <AxesSubplot:ylabel='State'>
 
 
 
 
+    
 ![png](index_files/index_86_1.png)
+    
 
 
 ## Stacking and Unstacking DataFrames
@@ -1805,67 +1742,17 @@ grouped.stack()
 
 
 
-    0    State                  Alabama
-         Gender                  Female
-         Deaths_mean            10753.3
-         Deaths_min                  10
-         Deaths_max              116297
-         Deaths_std             24612.3
-         Population_mean    1.07871e+06
-         Population_min            2087
-         Population_max         4334752
-         Population_std     1.40031e+06
-    1    State                  Alabama
-         Gender                    Male
-         Deaths_mean            10765.9
-         Deaths_min                  10
-         Deaths_max               88930
-         Deaths_std             20813.5
-         Population_mean    1.01495e+06
-         Population_min            1129
-         Population_max         4284775
-         Population_std     1.39783e+06
-    2    State                   Alaska
-         Gender                  Female
-         Deaths_mean            679.975
-         Deaths_min                  13
-         Deaths_max                4727
-         Deaths_std             1154.87
-         Population_mean         144040
-         Population_min            1224
-         Population_max          682855
-         Population_std          201579
-                               ...     
-    99   State                Wisconsin
-         Gender                    Male
-         Deaths_mean            9573.45
-         Deaths_min                  13
-         Deaths_max              113692
-         Deaths_std             25681.4
-         Population_mean    1.13532e+06
-         Population_min            1286
-         Population_max         6860107
-         Population_std     2.08907e+06
-    100  State                  Wyoming
-         Gender                  Female
-         Deaths_mean            1161.03
-         Deaths_min                  10
-         Deaths_max               13140
-         Deaths_std             2937.94
-         Population_mean         146757
-         Population_min             336
-         Population_max          672620
-         Population_std          235238
-    101  State                  Wyoming
-         Gender                    Male
-         Deaths_mean            1149.51
-         Deaths_min                  10
-         Deaths_max               10113
-         Deaths_std             2569.28
-         Population_mean         139224
-         Population_min             244
-         Population_max          694760
-         Population_std          241360
+    0    State                    Alabama
+         Gender                    Female
+         Deaths_mean            10753.325
+         Deaths_min                    10
+         Deaths_max                116297
+                                ...      
+    101  Deaths_std           2569.276968
+         Population_mean         139223.6
+         Population_min               244
+         Population_max            694760
+         Population_std     241359.853616
     Length: 1020, dtype: object
 
 
@@ -1893,68 +1780,18 @@ pivot
 
 
 
-    Gender  State               
-    Female  Alabama                 10753.325000
-            Alaska                    679.975000
-            Arizona                  8998.386364
-            Arkansas                 6621.615385
-            California              48312.840909
-            Colorado                 6460.162791
-            Connecticut              7144.641026
-            Delaware                 2000.029412
-            District of Columbia     1497.580645
-            Florida                 36019.071429
-            Georgia                 15372.317073
-            Hawaii                   2182.944444
-            Idaho                    2874.323529
-            Illinois                23432.926829
-            Indiana                 13425.717949
-            Iowa                     6419.707317
-            Kansas                   5492.309524
-            Kentucky                10426.083333
-            Louisiana                9076.585366
-            Maine                    3471.823529
-            Maryland                 9894.780488
-            Massachusetts           13356.846154
-            Michigan                18421.659091
-            Minnesota                8168.204545
-            Mississippi              6342.634146
-            Missouri                12493.170732
-            Montana                  2341.393939
-            Nebraska                 3667.794872
-            Nevada                   3729.166667
-            New Hampshire            3293.344828
-                                        ...     
-    Male    Massachusetts           11368.341463
-            Michigan                17940.431818
-            Minnesota                7792.795455
-            Mississippi              6487.317073
-            Missouri                11810.119048
-            Montana                  2081.102564
-            Nebraska                 3290.682927
-            Nevada                   4489.261905
-            New Hampshire            2800.303030
-            New Jersey              15085.317073
-            New Mexico               3549.428571
-            New York                29864.477273
-            North Carolina          15750.409091
-            North Dakota             1587.411765
-            Ohio                    23551.951220
-            Oklahoma                 7468.909091
-            Oregon                   6528.977273
-            Pennsylvania            27187.463415
-            Rhode Island             2239.243243
-            South Carolina           9078.292683
-            South Dakota             1800.500000
-            Tennessee               13333.050000
-            Texas                   34347.636364
-            Utah                     3081.511628
-            Vermont                  1785.846154
-            Virginia                12585.833333
-            Washington               9877.431818
-            West Virginia            6211.612903
-            Wisconsin                9573.454545
-            Wyoming                  1149.514286
+    Gender  State        
+    Female  Alabama          10753.325000
+            Alaska             679.975000
+            Arizona           8998.386364
+            Arkansas          6621.615385
+            California       48312.840909
+                                 ...     
+    Male    Virginia         12585.833333
+            Washington        9877.431818
+            West Virginia     6211.612903
+            Wisconsin         9573.454545
+            Wyoming           1149.514286
     Length: 102, dtype: float64
 
 

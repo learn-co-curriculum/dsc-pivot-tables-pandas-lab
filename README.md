@@ -39,7 +39,6 @@ Now, display the head of the DataFrame to ensure everything loaded correctly.
 
 ```python
 # Your code here
-
 ```
 
 Our data is currently in **_Wide_** format.  We can tidy this up by converting it to **_Long_** format by using groupby statements to aggregate our data into a much neater, more readable format. 
@@ -53,7 +52,6 @@ Complete the following groupby statements.
 
 ```python
 # Your code here
-
 ```
 
 - Groupby `State`, `Gender`, and `Race`. Find the average values.
@@ -61,7 +59,6 @@ Complete the following groupby statements.
 
 ```python
 # Your code here
-
 ```
 
 - Groupby `Gender` and `Race`. Find the minimum values.
@@ -69,7 +66,6 @@ Complete the following groupby statements.
 
 ```python
 # Your code here
-
 ```
 
 Create a bar chart of the total number of deaths by state: 
@@ -82,7 +78,6 @@ Create a bar chart of the total number of deaths by state:
 
 ```python
 # Your code here
-
 ```
 
 ### Inspecting our data
@@ -135,7 +130,6 @@ In the cell below:
 ```python
 # Your code here
 to_drop = None
-
 ```
 
 ### Complete the bar chart
@@ -145,7 +139,6 @@ Now that we've reformatted our data, let's create a bar chart of the mean `Popul
 
 ```python
 # Your code here
-
 ```
 
 Below we will investigate how we can combine the `.pivot()` method along with the `.groupby()` method to combine some cool **stacked bar charts**!
@@ -187,7 +180,7 @@ In the cell below, call the DataFrame's `.reset_index()` method.  Then, display 
 
 
 ```python
-# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index 
+# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index
 grouped = None
 ```
 
@@ -207,7 +200,6 @@ In the cell below, examine the `columns` attribute of `grouped` to confirm this.
 
 ```python
 # Notice that this causes columns to be MultiIndexed!
-
 ```
 
 ### Column levels
@@ -237,7 +229,9 @@ We can also **_flatten_** the DataFrame from a multi-hierarchical index to a mor
 # We could also flatten these:
 cols0 = grouped.columns.get_level_values(0)
 cols1 = grouped.columns.get_level_values(1)
-grouped.columns = [col0 + '_' + col1 if col1 != '' else col0 for col0, col1 in list(zip(cols0, cols1))]
+grouped.columns = [
+    col0 + "_" + col1 if col1 != "" else col0 for col0, col1 in list(zip(cols0, cols1))
+]
 # The list comprehension above is more complicated then what we need but creates a nicer formatting and
 # demonstrates using a conditional within a list comprehension.
 # This simpler version works but has some tail underscores where col1 is blank:
@@ -296,7 +290,6 @@ In the cell below, call `pivot.plot()` with the following parameters:
 
 ```python
 # Now let's make a sweet bar chart!!
-
 ```
 
 Notice the Y-axis is currently just a list of numbers.  That's because when we reset the index, it defaulted to assigning integers as the index for the DataFrame.  Let's set the index back to `'State'`, and then recreate the visualization. 
@@ -309,11 +302,10 @@ All the code in this cell should be done in a single line.  Just call the method
 
 
 ```python
-# Where's the states?! Notice the y-axis is just a list of numbers. 
+# Where's the states?! Notice the y-axis is just a list of numbers.
 # This is populated by the DataFrame's index.
-# When we used the .reset_index() method, we created a new numbered index to name each row. 
+# When we used the .reset_index() method, we created a new numbered index to name each row.
 # Let's fix that by making state the index again.
-
 ```
 
 Now that we've created a visualization with the states as the y-axis, let's print out the head of the `pivot` object again. 
@@ -323,7 +315,6 @@ Now that we've created a visualization with the states as the y-axis, let's prin
 # Also notice that if we call the DataFrame pivot again, state is not it's index.
 # The above method returned a DataFrame with State as index and we plotted it,
 # but it did not update the DataFrame itself.
-
 ```
 
 Note that the index has not changed.  That's because the code we wrote when we set the index to the `'State'` column returns a copy of the DataFrame object with the index set to `'State'` -- by default, it does not mutate original `pivot` object.  
@@ -353,7 +344,6 @@ In the cell below, recreate the visualization we did in the cell above, but this
 ```python
 # Lastly, let's stack each of these bars for each state.
 # Notice we don't have to worry about index here, because we've already set it above.
-
 ```
 
 ## Stacking and Unstacking DataFrames

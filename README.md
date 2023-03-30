@@ -28,9 +28,10 @@ In the cell below:
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 import pandas as pd
 import matplotlib.pyplot as plt
+
 %matplotlib inline
 ```
 
@@ -44,8 +45,8 @@ df = None
 
 
 ```python
-# __SOLUTION__ 
-df = pd.read_csv('causes_of_death.tsv', delimiter='\t')
+# __SOLUTION__
+df = pd.read_csv("causes_of_death.tsv", delimiter="\t")
 ```
 
 Now, display the head of the DataFrame to ensure everything loaded correctly.
@@ -53,12 +54,11 @@ Now, display the head of the DataFrame to ensure everything loaded correctly.
 
 ```python
 # Your code here
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 df.head()
 ```
 
@@ -190,14 +190,13 @@ Complete the following groupby statements.
 
 ```python
 # Your code here
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Your code here
-df.groupby(['State', 'Gender'])['Deaths'].sum().head()
+df.groupby(["State", "Gender"])["Deaths"].sum().head()
 ```
 
 
@@ -218,14 +217,13 @@ df.groupby(['State', 'Gender'])['Deaths'].sum().head()
 
 ```python
 # Your code here
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Your code here
-df.groupby(['State', 'Gender', 'Race'])['Deaths'].mean().head()
+df.groupby(["State", "Gender", "Race"])["Deaths"].mean().head()
 ```
 
 
@@ -246,14 +244,13 @@ df.groupby(['State', 'Gender', 'Race'])['Deaths'].mean().head()
 
 ```python
 # Your code here
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Your code here
-df.groupby(['Gender', 'Race']).min().head()
+df.groupby(["Gender", "Race"]).min().head()
 ```
 
 
@@ -388,15 +385,14 @@ Create a bar chart of the total number of deaths by state:
 
 ```python
 # Your code here
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Your code here
-df.groupby(['State'])['Deaths'].sum().sort_values().plot(kind='barh', figsize=(15,8))
-plt.title('Total Deaths by State')
+df.groupby(["State"])["Deaths"].sum().sort_values().plot(kind="barh", figsize=(15, 8))
+plt.title("Total Deaths by State")
 plt.xlabel("# of Deaths")
 ```
 
@@ -426,7 +422,7 @@ In the cell below, use the `.info()` method of the DataFrame, and note the data 
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 df.info()
 ```
 
@@ -462,7 +458,7 @@ In the cell below, display the population values for the first 5 rows in the Dat
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 df.Population.iloc[:5]
 ```
 
@@ -489,7 +485,7 @@ In the cell below, print out the top 5 `value_counts()` of the population column
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 df.Population.value_counts()[:5]
 ```
 
@@ -526,17 +522,16 @@ In the cell below:
 ```python
 # Your code here
 to_drop = None
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Your code here
-to_drop = df[df['Population'] == 'Not Applicable']
+to_drop = df[df["Population"] == "Not Applicable"]
 df.drop(to_drop.index, axis=0, inplace=True)
-df['Population'] = df['Population'].astype('int64')
-print(df['Population'].dtype)
+df["Population"] = df["Population"].astype("int64")
+print(df["Population"].dtype)
 ```
 
     int64
@@ -549,14 +544,13 @@ Now that we've reformatted our data, let's create a bar chart of the mean `Popul
 
 ```python
 # Your code here
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Your code here
-df.groupby('State')['Population'].mean().plot(kind='barh', figsize=(15,8))
+df.groupby("State")["Population"].mean().plot(kind="barh", figsize=(15, 8))
 ```
 
 
@@ -594,11 +588,11 @@ grouped = None
 
 
 ```python
-# __SOLUTION__ 
-# Your code here 
-grouped = df.groupby(['State', 'Gender'])['Deaths', 
-                                          'Population'].agg(['mean', 
-                                                             'min', 'max', 'std'])
+# __SOLUTION__
+# Your code here
+grouped = df.groupby(["State", "Gender"])["Deaths", "Population"].agg(
+    ["mean", "min", "max", "std"]
+)
 grouped.head()
 ```
 
@@ -738,7 +732,7 @@ In the cell below, display the `index` attribute of this DataFrame.
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.index
 ```
 
@@ -778,14 +772,14 @@ In the cell below, call the DataFrame's `.reset_index()` method.  Then, display 
 
 
 ```python
-# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index 
+# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index
 grouped = None
 ```
 
 
 ```python
-# __SOLUTION__ 
-# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index 
+# __SOLUTION__
+# First, reset the index. Notice the subtle difference; State and Gender are now columns rather than the index
 grouped = grouped.reset_index()
 grouped.head()
 ```
@@ -913,7 +907,7 @@ Let's confirm this by reexamining the `index` attribute of `grouped` in the cell
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.index
 ```
 
@@ -931,12 +925,11 @@ In the cell below, examine the `columns` attribute of `grouped` to confirm this.
 
 ```python
 # Notice that this causes columns to be MultiIndexed!
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Notice that this causes columns to be MultiIndexed!
 grouped.columns
 ```
@@ -971,7 +964,7 @@ In the cell below, use the `.get_level_values()` method contained within the Dat
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.columns.get_level_values(0)
 ```
 
@@ -993,7 +986,7 @@ Now, get the level values for the inner layer of the index.
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.columns.get_level_values(1)
 ```
 
@@ -1013,7 +1006,9 @@ We can also **_flatten_** the DataFrame from a multi-hierarchical index to a mor
 # We could also flatten these:
 cols0 = grouped.columns.get_level_values(0)
 cols1 = grouped.columns.get_level_values(1)
-grouped.columns = [col0 + '_' + col1 if col1 != '' else col0 for col0, col1 in list(zip(cols0, cols1))]
+grouped.columns = [
+    col0 + "_" + col1 if col1 != "" else col0 for col0, col1 in list(zip(cols0, cols1))
+]
 # The list comprehension above is more complicated then what we need but creates a nicer formatting and
 # demonstrates using a conditional within a list comprehension.
 # This simpler version works but has some tail underscores where col1 is blank:
@@ -1023,11 +1018,13 @@ grouped.columns
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # We could also flatten these:
 cols0 = grouped.columns.get_level_values(0)
 cols1 = grouped.columns.get_level_values(1)
-grouped.columns = [col0 + '_' + col1 if col1 != '' else col0 for col0, col1 in list(zip(cols0, cols1))]
+grouped.columns = [
+    col0 + "_" + col1 if col1 != "" else col0 for col0, col1 in list(zip(cols0, cols1))
+]
 # The list comprehension above is more complicated then what we need but creates a nicer formatting and
 # demonstrates using a conditional within a list comprehension.
 # This simpler version works but has some tail underscores where col1 is blank:
@@ -1056,7 +1053,7 @@ In the cell below, inspect the `.head()` of the `grouped` DataFrame.
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.head()
 ```
 
@@ -1185,9 +1182,9 @@ pivot = None
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Now it's time to pivot!
-pivot = grouped.pivot(index='State', columns='Gender', values='Deaths_mean')
+pivot = grouped.pivot(index="State", columns="Gender", values="Deaths_mean")
 pivot.head()
 ```
 
@@ -1267,9 +1264,9 @@ pivot = None
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Again, notice the subtle difference of resetting the index:
-pivot = pivot.reset_index( )
+pivot = pivot.reset_index()
 pivot.head()
 ```
 
@@ -1348,14 +1345,13 @@ In the cell below, call `pivot.plot()` with the following parameters:
 
 ```python
 # Now let's make a sweet bar chart!!
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Now let's make a sweet bar chart!!
-pivot.plot(kind='barh', figsize=(15,8))
+pivot.plot(kind="barh", figsize=(15, 8))
 ```
 
 
@@ -1381,21 +1377,20 @@ All the code in this cell should be done in a single line.  Just call the method
 
 
 ```python
-# Where's the states?! Notice the y-axis is just a list of numbers. 
+# Where's the states?! Notice the y-axis is just a list of numbers.
 # This is populated by the DataFrame's index.
-# When we used the .reset_index() method, we created a new numbered index to name each row. 
+# When we used the .reset_index() method, we created a new numbered index to name each row.
 # Let's fix that by making state the index again.
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Where's the states?! Notice the y-axis is just a list of numbers.
 # This is populated by the DataFrame's index.
-# When we used the .reset_index() method, we created a new numbered index to name each row. 
+# When we used the .reset_index() method, we created a new numbered index to name each row.
 # Let's fix that by making state the index again.
-pivot.set_index('State').plot(kind='barh', figsize=(15,8))
+pivot.set_index("State").plot(kind="barh", figsize=(15, 8))
 ```
 
 
@@ -1418,12 +1413,11 @@ Now that we've created a visualization with the states as the y-axis, let's prin
 # Also notice that if we call the DataFrame pivot again, state is not it's index.
 # The above method returned a DataFrame with State as index and we plotted it,
 # but it did not update the DataFrame itself.
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Also notice that if we call the DataFrame pivot again, state is not it's index.
 # The above method returned a DataFrame with State as index and we plotted it,
 # but it did not update the DataFrame itself.
@@ -1489,10 +1483,10 @@ pivot = None
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # If we wanted to more permanently change the index we would set it first and then plot:
-pivot = pivot.set_index('State')
-pivot.plot(kind='barh', figsize=(15,8))
+pivot = pivot.set_index("State")
+pivot.plot(kind="barh", figsize=(15, 8))
 ```
 
 
@@ -1517,7 +1511,7 @@ Again, let's check the `.head()` of the DataFrame to confirm that the index stru
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 pivot.head(2)
 ```
 
@@ -1576,15 +1570,14 @@ In the cell below, recreate the visualization we did in the cell above, but this
 ```python
 # Lastly, let's stack each of these bars for each state.
 # Notice we don't have to worry about index here, because we've already set it above.
-
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 # Lastly, let's stack each of these bars for each state.
 # Notice we don't have to worry about index here, because we've already set it above.
-pivot.plot(kind='barh', figsize=(15,8), stacked=True)
+pivot.plot(kind="barh", figsize=(15, 8), stacked=True)
 ```
 
 
@@ -1615,7 +1608,7 @@ In the cell below, let's display the head of `grouped` to remind ourselves of th
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.head()
 ```
 
@@ -1735,7 +1728,7 @@ In the cell below, call the `grouped` DataFrame's `.stack()` method.
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 grouped.stack()
 ```
 
@@ -1772,7 +1765,7 @@ pivot = None
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 pivot = pivot.unstack()
 pivot
 ```
@@ -1807,7 +1800,7 @@ pivot = None
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 pivot = pivot.unstack()
 pivot
 ```

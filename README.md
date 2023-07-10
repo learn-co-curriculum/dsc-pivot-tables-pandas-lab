@@ -510,7 +510,7 @@ Then, display the `.head()` of this new DataFrame.
 
 ```python
 # Your code here
-grouped = df.groupby(["State", "Gender"])["Deaths", "Population"].agg(
+grouped = df.groupby(["State", "Gender"])[["Deaths", "Population"]].agg(
     ["mean", "min", "max", "std"]
 )
 grouped.head()

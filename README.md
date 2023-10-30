@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we'll learn how to make use of our newfound knowledge of pivot tables to work with real-world data.  
+In this lab, use pivot tables with real-world data.  
 
 ## Objectives
 
@@ -344,7 +344,7 @@ Create a bar chart of the total number of deaths by state:
 * Sort your columns in order (ascending or descending are both acceptable).  
 * Also make sure to include a title, axes labels and have your graph be an appropriate size.
 
-**_NOTE:_** In order to do this, slice the `Deaths` column after the `.groupby()` method, but before the `.sum()` method.  You can even chain the `.plot()` method on after the `.sum()` method and do this all on one line, excluding the labeling of the graph!
+**_NOTE:_** In order to do this, slice the `Deaths` column after the `.groupby()` method, but before the `.sum()` method.  You can even chain the `.plot()` method on after the `.sum()` method and do this all on one line, excluding the labeling of the graph.
 
 
 ```python
@@ -456,7 +456,7 @@ In the cell below:
 * Print the `Population` column's `dtype` attribute to confirm it is now stored in `int64` format  
 
 
-**_NOTE:_** `.astype()` returns a copy of the column, so make sure you set the Population column equal to what this method returns--don't just call it!
+**_NOTE:_** `.astype()` returns a copy of the column, so make sure you set the Population column equal to what this method returns--don't just call it.
 
 
 ```python
@@ -493,7 +493,7 @@ df.groupby("State")["Population"].mean().plot(kind="barh", figsize=(15, 8))
     
 
 
-Below we will investigate how we can combine the `.pivot()` method along with the `.groupby()` method to combine some cool **stacked bar charts**!
+Below we will investigate how we can combine the `.pivot()` method along with the `.groupby()` method to combine some cool **stacked bar charts**.
 
 ## Use aggregate methods
 
@@ -825,7 +825,7 @@ In the cell below, examine the `columns` attribute of `grouped` to confirm this.
 
 
 ```python
-# Notice that this causes columns to be MultiIndexed!
+# Notice that this causes columns to be MultiIndexed
 grouped.columns
 ```
 
@@ -882,7 +882,7 @@ grouped.columns.get_level_values(1)
 
 ## Flattening the DataFrame
 
-We can also **_flatten_** the DataFrame from a multi-hierarchical index to a more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it -- but take some time to examine the code in the cell below and see if you can understand how it works! 
+We can also **_flatten_** the DataFrame from a multi-hierarchical index to a more traditional one-dimensional index.  We do this by creating each unique combination possible of every level of the multi-hierarchical index.  Since this is a complex task, you do not need to write it -- but take some time to examine the code in the cell below and see if you can understand how it works. 
 
 
 ```python
@@ -1037,7 +1037,7 @@ Then, display the `.head()` of our new `pivot` DataFrame to see what it looks li
 
 
 ```python
-# Now it's time to pivot!
+# Now it's time to pivot
 pivot = grouped.pivot(index="State", columns="Gender", values="Deaths_mean")
 pivot.head()
 ```
@@ -1104,7 +1104,7 @@ pivot.head()
 
 
 
-Great! We've just created a pivot table.  
+We've just created a pivot table.  
 
 Let's reset the index and see how it changes our pivot table. 
 
@@ -1191,7 +1191,7 @@ In the cell below, call `pivot.plot()` with the following parameters:
 
 
 ```python
-# Now let's make a sweet bar chart!!
+# Now let's make a sweet bar chart
 pivot.plot(kind="barh", figsize=(15, 8))
 ```
 
@@ -1218,7 +1218,7 @@ All the code in this cell should be done in a single line.  Just call the method
 
 
 ```python
-# Where's the states?! Notice the y-axis is just a list of numbers.
+# Where are the states? Notice the y-axis is just a list of numbers.
 # This is populated by the DataFrame's index.
 # When we used the .reset_index() method, we created a new numbered index to name each row.
 # Let's fix that by making state the index again.
@@ -1542,7 +1542,7 @@ grouped.stack()
 
 
 
-As we can see, the `.stack()` method has stacked our DataFrame from a flattened format into one with a multi-hierarchical index! This is an easy, quick way to aggregate our data.
+As we can see, the `.stack()` method has stacked our DataFrame from a flattened format into one with a multi-hierarchical index. This is an easy, quick way to aggregate our data.
 
 ### Unstacking 
 
@@ -1575,7 +1575,7 @@ pivot
 
 
 
-Note that it has unstacked the multi-hierarchical structure of the `pivot` DataFrame by one level. Let's call it one more time and display the results!
+Note that it has unstacked the multi-hierarchical structure of the `pivot` DataFrame by one level. Let's call it one more time and display the results.
 
 In the cell below, set `pivot` equal to `pivot.unstack()` again, and then print the `pivot` object to see how things have changed.
 
@@ -1709,7 +1709,7 @@ pivot
 
 
 
-After calling unstack a second time, we can see that `pivot` has a flattened structure since it has been completely unstacked!
+After calling unstack a second time, we can see that `pivot` has a flattened structure since it has been completely unstacked.
 
 ## Summary
 
